@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>VueJS Introdução</title>
+</head>
+<body>
+    <div id="App">
+        <h1>{{titulo}}</h1>
+        <p v-if="comprou">{{conteudo}}</p>
+        <p>{{lado * lado - lado / 100}}</p>
+        <p>{{comprou ? "Comprado" : "Compra ai"}}</p>
+        <!-- v-bin: pode ser substituído por : -->
+        <a v-bind:href="href" target="_blank">Link</a>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#App',
+            data: {
+                titulo: 'Curso de JavaScript',
+                conteudo: 'esse é o conteúdo.',
+                lado: 5,
+                comprou: false,
+                href: 'https://github.com/Henrique1204'
+            }
+        });
+    </script>
+</body>
+</html>
