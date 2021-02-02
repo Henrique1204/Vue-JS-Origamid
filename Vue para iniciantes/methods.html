@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>Methods</title>
+</head>
+<body>
+    <div id="App">
+        <div>
+            {{total}}
+            <button @click="incrementar">Incrementar</button>
+            <button @click="diminuir">Diminuir</button>
+        </div>
+
+        <div>
+            {{instrumento}}
+            <button @click="mudarCompra('Guitarra')">Guitarra</button>
+            <button @click="mudarCompra('Violão')">Violão</button>
+        </div>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#App',
+            data: {
+                total: 0,
+                instrumento: ''
+            },
+            methods: {
+                incrementar() { this.total++; },
+                diminuir() { this.total--; },
+                mudarCompra(compra) { this.instrumento = compra; }
+            }
+        });
+    </script>
+</body>
+</html>

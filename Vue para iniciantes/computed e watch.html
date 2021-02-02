@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>Computed e Watch</title>
+</head>
+<body>
+    <div id="App">
+        <h1>{{total}}</h1>
+
+        <div>
+            <input type="text" placeholder="cep" maxlength="8" v-model="cep">
+            <h2>{{cep}}</h2>
+        </div>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#App',
+            data: {
+                preco: 59,
+                desconto: 10,
+                cep: ''
+            },
+            computed: {
+                total() {
+                    return "R$ " + (this.preco - this.desconto);
+                }
+            },
+            watch: {
+                async cep() {
+                    if (this.cep.length === 8) {
+                        const res = await fetch(`https://viacep.com.br/ws/${this.cep}/json`);
+
+                        if (res.ok) const json = await res.json();
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

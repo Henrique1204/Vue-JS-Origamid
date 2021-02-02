@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>V-if</title>
+</head>
+<body>
+    <div id="App">
+        <p v-if="logado">Você está logado.</p>
+        <p v-else>Faça o login.</p>
+        <button @click="logado = !logado">Login</button>
+
+        <div>
+            <p>Carrinho: {{carrinho}}</p>
+            <button @click="carrinho++" v-if="carrinho < 7">Adicionar no carrinho</button>
+            <p v-else>Limite de estoque atingido</p>
+        </div>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#App',
+            data: {
+                logado: false,
+                carrinho: 0
+            }
+        })
+    </script>
+</body>
+</html>

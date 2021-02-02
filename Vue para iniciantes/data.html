@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>Data</title>
+</head>
+<body>
+    <div id="App1">{{empresa}}, {{produto}}</div>
+    <div id="App2">
+        <p>Lado: {{lado_quadrado}}</p>
+        <p>Perímetro: {{lado_quadrado * 4}}</p>
+        <p>Área: {{lado_quadrado * lado_quadrado}}</p>
+    </div>
+
+    <script>
+        const vm1 = new Vue({ el: '#App1', data: {
+            empresa: 'Apple',
+            produto: 'iPhone'
+        }});
+
+        const vm2 = new Vue({ el: '#App2', data: {
+            lado_quadrado: 4
+        }});
+    </script>
+</body>
+</html>

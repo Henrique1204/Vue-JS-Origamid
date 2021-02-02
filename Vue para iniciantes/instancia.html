@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>Instância</title>
+</head>
+<body>
+    <div id="App1">{{feramenta}}</div>
+    <div id="App2">{{instrumento}}</div>
+
+    <script>
+        const vm1 = new Vue({
+            el: '#App1',
+            data: {
+                feramenta: 'Martelo'
+            }
+        });
+
+        const vm2 = new Vue({
+            el: '#App2',
+            data: {
+                instrumento: 'Violão'
+            }
+        });
+    </script>
+</body>
+</html>

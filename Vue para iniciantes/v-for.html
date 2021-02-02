@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>V-for</title>
+</head>
+<body>
+    <div id="App">
+        <button @click="buscarCep">Puxar cep</button>
+        <ul>
+            <li v-for="(cep, key, index) in ceps" :key="key + '_' + index">{{cep}}</li>
+        </ul>
+        <button @click="buscarCursos">Puxar cursos</button>
+        <ul>
+            <li v-for="({ curso, link, aulas }, key, index) in cursos" :key="key + '_' + index">
+                <p>{{curso}} - {{link}}</p>
+                <ul>
+                    <li v-for="({ nome, tempo }, index) in aulas" :key="nome + '_' + index">
+                        <p>{{nome}} - {{tempo}}</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#App',
+            data: {
+                ceps: '',
+                cursos: ''
+            },
+            methods: {
+                async buscarCep() {
+                    const res = await fetch('https://viacep.com.br/ws/04538133/json/');
+                    this.ceps = await res.json();
+                },
+                async buscarCursos() {
+                    const res = await fetch('./cursos.json');
+                    this.cursos = await res.json();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
