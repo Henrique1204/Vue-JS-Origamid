@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>Ciclo de vida</title>
+</head>
+<body>
+    <div id="App">
+        <div class="card">
+            <div class="imgContainer">
+                <img :src="dados?.avatar_url" :alt="dados?.login">
+            </div>
+
+            <h1>{{dados?.name}}</h1>
+            <p>{{dados?.bio}}</p>
+            <p>Repositórios: <span class="repo">{{dados?.public_repos}}</span></p>
+        </div>
+
+        <button @click="contador++">Contador: {{contador}}</button>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#App',
+            data: {
+                dados: null,
+                contador: 0
+            },
+            methods: {
+                async buscarDados() {
+                    const res = await fetch('https://api.github.com/users/henrique1204');
+                    this.dados = await res.json();
+                }
+            },
+            created() {
+                this.buscarDados();
+            },
+            updated() {
+                document.title = this.contador;
+            }
+        })
+    </script>
+
+    <style>
+        .card {
+            max-width: 480px;
+            padding: 2rem;
+            border-radius: 6px;
+            margin: 0 auto;
+            font-family: monospace;
+            text-align: center;
+            color: #F4F4F4;
+            background-color: #222;
+            box-shadow: 2px 2px 4px rgba(34, 34, 34, 0.4);
+        }
+
+        .card .imgContainer {
+            width: 300px;
+            border-radius: 50%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .card img {
+            width: 100%;
+            display: block;
+        }
+
+        .card h1 {
+            font-size: 1.25rem;
+            font-weight: 400;
+            text-transform: capitalize;
+            letter-spacing: 0.1rem;
+        }
+
+        .card p {
+            font-size: 0.875rem;
+            letter-spacing: 0.1rem;
+        }
+
+        .card .repo {
+            padding: 2px 6px;
+            border-radius: 2px;
+            color: #222;
+            background-color: #F4F4F4;
+        }
+    </style>
+</body>
+</html>

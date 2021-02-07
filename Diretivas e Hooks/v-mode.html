@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>v-model</title>
+</head>
+<body>
+    <div id="App1">
+        <h2>Exercicio 1</h2>
+        <div>
+            <label v-for="(valor, key, index) in valoresEstilo" for="key" :key="key + '_' + index">
+                {{key}} <input type="text" v-model="valoresEstilo[key]" />
+            </label>
+    
+            <label v-for="(valor, key, index) in cores" for="key" :key="key + '_' + index">
+                {{key}} <input type="color" v-model="cores[key]" />
+            </label>
+        </div>
+
+        <button :style="{ ...valoresEstilo, ...cores }" >Botão</button>
+    </div>
+
+    <div id="App2">
+        <h2>Exercicio 2</h2>
+
+        <form>
+            <label for="nome">Nome</label>
+            <input type="text" name="nome" id="nome" v-model="nome">
+
+            <label for="email">E-mail</label>
+            <input type="text" name="email" id="email" v-model="email">
+
+            <label for="telefone">Telefone</label>
+            <input type="text" name="telefone" id="telefone" v-model="telefone">
+
+            <label for="msg">Mensagem</label>
+            <textarea name="msg" id="msg" v-model="msg"></textarea>
+
+            <button @click.prevent="enviarDados">enviar</button>
+        </form>
+
+        {{resultado}}
+    </div>
+
+    <script>
+        const vm1 = new Vue({
+            el: '#App1',
+            data: {
+                valoresEstilo: {
+                    'width': '',
+                    'height': '',
+                    'font-size': '',
+                    'font-family': '',
+                    'text-align': '',
+                    'border-radius': ''
+                },
+                cores: {
+                    'color': '',
+                    'background': ''
+                }
+            }
+        });
+
+        const vm2 = new Vue({
+            el: '#App2',
+            data: {
+                nome: '',
+                email: '',
+                telefone: '',
+                msg: '',
+                resultado: {}
+            },
+            methods: {
+                enviarDados() {
+                    console.log("OIIIIIIII");
+                    this.resultado = {
+                        nome: this.nome,
+                        email: this.email,
+                        telefone: this.telefone,
+                        msg: this.msg
+                    }
+                }
+            }
+        });
+    </script>
+
+    <style>
+        #App1 {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        #App1 h2 {
+            width: 100%;
+            text-align: center;
+        }
+
+        #App1 label {
+            width: 300px;
+            margin: 0.5rem 0;
+            text-transform: capitalize;
+            display: block;
+        }
+
+        #App1 input {
+            margin-top: 2px;
+            width: 100%;
+        }
+
+        #App2 label{
+            display: block;
+        }
+    </style>
+</body>
+</html>

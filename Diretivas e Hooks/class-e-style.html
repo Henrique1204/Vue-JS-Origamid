@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>Class e Style</title>
+</head>
+<body>
+    <div id="App">
+        <ul :class="{ column: coluna }">
+            <li :style="{ backgroundColor: cor }">Sobre</li>
+            <li :style="{ backgroundColor: cor }">Produtos</li>
+            <li :style="{ backgroundColor: cor }">Serviços</li>
+            <li :style="{ backgroundColor: cor }">Contato</li>
+        </ul>
+        
+        <button @click="coluna = !coluna" >Mudar direção</button>
+        <button @click="mudarCor">Mudar cor</button>
+    </div>
+    
+    <script>
+        const vm = new Vue({
+            el: '#App',
+            data: {
+                coluna: false,
+                cor: '#84E'
+            }, methods: {
+                mudarCor() {
+                    this.cor = `hsl(${Math.random() * 360}, 100%, 50%)`
+                }
+            }
+        });
+
+    </script>
+    
+    <style>
+        ul {
+            padding: 0px;
+            margin: 0px;
+            font-family: monospace;
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .column {
+            flex-direction: column;
+        }
+        
+        li {
+            padding: 20px;
+            border-radius: 4px;
+            margin: 10px;
+            text-align: center;
+            color: #FFF;
+            background-color: #84E;
+            flex: 1;
+        }
+    </style>
+</body>
+</html>
